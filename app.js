@@ -20,6 +20,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.get("/", (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+})
+
+app.post("/", (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+})
+
 app.listen(PORT, () => {
     console.log(`App listened on port ${PORT}`)
 })
