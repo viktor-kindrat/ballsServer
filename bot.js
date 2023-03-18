@@ -14,6 +14,7 @@ const corsOptions = {
     },
 };
 
+app.use(cors());
 app.use(cors(corsOptions));
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
