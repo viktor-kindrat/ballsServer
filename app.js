@@ -1,6 +1,6 @@
 let express = require("express")
 let app = express();
-let PORT = 5555
+let PORT = process.env.PORT || 5555
 
 let bot = require("./bot")
 app.use("/bot", bot);
