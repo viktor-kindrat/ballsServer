@@ -16,7 +16,7 @@ bot.on("message", msg => {
 })
 
 app.post("/", (req, res) => {
-    let message = req.body.message;
+    let message = JSON.parse(req.body.message);
     bot.sendMessage(751853129, message);
     res.header('Access-Control-Allow-Origin', '*');
     res.send(200).json("success")
