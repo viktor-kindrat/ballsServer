@@ -1,5 +1,20 @@
 let express = require("express")
 let app = express();
+
+const cors = require('cors');
+const allowedOrigins = ['https://ball-shop-abibas.netlify.app/', 'http://localhost:3000'];
+
+const corsOptions = {
+    origin: function(origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+};
+
+app.use(cors(corsOptions));
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
