@@ -1,24 +1,12 @@
 let express = require("express")
 let app = express();
 
-const cors = require('cors');
-const allowedOrigins = ['https://ball-shop-abibas.netlify.app/', 'http://localhost:3000'];
-
-const corsOptions = {
-    origin: function(origin, callback) {
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-};
-
-app.use(cors());
-app.use(cors(corsOptions));
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+const cors = require('cors');
+app.use(cors())
 
 require("dotenv").config()
 const TOKEN = process.env.TG_TOKEN;
@@ -32,10 +20,9 @@ bot.on("message", msg => {
 })
 
 app.post("/", (req, res) => {
-    let message = JSON.parse(req.body.message);
+    let message = req.body.message;
     bot.sendMessage(751853129, message);
-    res.header('Access-Control-Allow-Origin', '*');
-    res.send(200).json("success")
+    res.send(200).json({ msg: "success" })
 })
 
 module.exports = app;
